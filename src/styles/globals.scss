@@ -1,0 +1,34 @@
+@use "./utils.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  // color: utils.$primary;
+  // background-color: utils.$bg-color;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.home {
+  &__container {
+    padding: 0 15%;
+
+    @include utils.mobile {
+      padding: 0 5%;
+    }
+  }
+}
+
+.--loaded {
+  opacity: 1;
+}
