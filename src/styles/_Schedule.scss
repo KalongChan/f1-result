@@ -1,0 +1,49 @@
+@use "./utils.scss";
+
+.container {
+  // width: 50%;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__race {
+    height: 100%;
+    // width: 100%;
+    width: 320px;
+    padding: 5px;
+    background-color: utils.$race-bg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &--actived {
+      @extend .schedule__race;
+      background-color: utils.$race-active-bg;
+      color: utils.$race-active-text;
+    }
+
+    &--coming-race {
+      @extend .schedule__race;
+      opacity: 0.4;
+    }
+
+    &-flag {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 20px;
+      & img {
+        width: 50px;
+      }
+    }
+    &-info {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

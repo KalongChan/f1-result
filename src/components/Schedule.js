@@ -5,6 +5,7 @@ var convert = require("xml-js");
 const Schedule = () => {
   const [loaded, setLoaded] = useState(false);
   const [schedule, setSchedule] = useState();
+  const [parseRaceTime, setParseRaceTime] = useState();
 
   useEffect(() => {
     if (!loaded) {
@@ -19,25 +20,37 @@ const Schedule = () => {
     var options = {compact: true, ignoreComment: true, spaces: 4};
     const json = convert.xml2js(res.data, options);
     const data = json.MRData.RaceTable.Race;
+    const parseRaceTime = [];
+    data.map((race) => {
+      parseRaceTime.push(Date.parse(new Date(race.Date._text)));
+    });
     setSchedule(data);
+    setParseRaceTime(parseRaceTime);
   };
 
-  console.log(schedule);
-  //           {race.Circuit.CircuitName._text}
-
   return (
-    <div className="schedule">
-      {schedule?.map((race, index) => (
-        <div className="schedule__race" key={index}>
-          <div className="schedule__race-flag">
-            {race.Circuit.Location.Country._text}
+    <div className="container">
+      <div className="schedule">
+        {schedule?.map((race, index) => (
+          <div
+            className={`schedule__race${
+              parseRaceTime[index] > Date.now() ? "--coming-race" : ""
+            }${index === 1 ? "--actived" : ""}`}
+            key={index}
+          >
+            <div className="schedule__race-flag">
+              <img
+                src={`countryflags/${race.Circuit.Location.Country._text}.svg`}
+                alt=""
+              />
+            </div>
+            <div className="schedule__race-info">
+              <div className="schedule__race-title">{race.RaceName._text}</div>
+              <div className="schedule__race-date">{race.Date._text}</div>
+            </div>
           </div>
-          <div className="schedule__race-info">
-            <div className="schedule__race-title">{race.RaceName._text}</div>
-            <div className="schedule__race-date">{race.Date._text}</div>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
