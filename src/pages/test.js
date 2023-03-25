@@ -1,17 +1,6 @@
-import "/node_modules/flag-icons/css/flag-icons.min.css";
-var iso = require("iso-3166-1-alpha-2");
+import LastestRace from "@/components/LastestRace";
 
 const test = () => {
-  const countryName = "UK";
-  const isoCode = iso.getCode(countryName);
-  console.log(isoCode); // Output: 'US'
-
-  return (
-    <>
-      <span className={`fi fi-${isoCode.toLowerCase()}`}></span>
-
-      <br />
-    </>
-  );
+  return <LastestRace />;
 };
 export default test;

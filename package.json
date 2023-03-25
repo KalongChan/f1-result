@@ -13,10 +13,11 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "flag-icons": "^6.6.6",
-    "iso-3166-1-alpha-2": "^1.0.1",
+    "i18n-nationality": "^1.2.0",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-table": "^7.8.0",
     "sass": "^1.60.0",
     "scss": "^0.2.4",
     "xml-js": "^1.6.11"
