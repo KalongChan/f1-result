@@ -1,11 +1,13 @@
 import axios from "axios";
+import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 var convert = require("xml-js");
 
-const Schedule = () => {
+const Schedule = ({raceInfo}) => {
   const [loaded, setLoaded] = useState(false);
   const [schedule, setSchedule] = useState();
   const [parseRaceTime, setParseRaceTime] = useState();
+  const router = useRouter();
 
   useEffect(() => {
     if (!loaded) {
@@ -28,14 +30,28 @@ const Schedule = () => {
     setParseRaceTime(parseRaceTime);
   };
 
+  const handleClick = (time, race) => {
+    if (time > Date.now()) {
+      return;
+    }
+    router.push(
+      `/results?year=${race._attributes.season}&round=${race._attributes.round}`
+    );
+  };
+
+  const isActive = (index) => {
+    return index === router.query.round - 1 || index === raceInfo?.round - 1;
+  };
+
   return (
     <div className="schedule">
       {schedule?.map((race, index) => (
         <div
           className={`schedule__race${
             parseRaceTime[index] > Date.now() ? "--coming-race" : ""
-          }${index === 1 ? "--actived" : ""}`}
+          }${isActive(index) ? "--actived" : ""}`}
           key={index}
+          onClick={() => handleClick(parseRaceTime[index], race)}
         >
           <div className="schedule__race-flag">
             <img
