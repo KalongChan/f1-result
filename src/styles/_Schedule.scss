@@ -1,16 +1,26 @@
 @use "./utils.scss";
 
 .schedule {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  height: 800px;
+  // height: 100%;
+  // width: 100%;
+  // width: 300px;
+  overflow: auto;
+  margin-top: auto;
+  // flex-basis: 20%;
+  flex-shrink: 0; // white-space: nowrap;
 
   &__race {
-    height: 100%;
+    // height: 100%;
+    // width: 300px;
     // width: 100%;
-    width: 320px;
-    padding: 5px;
-    background-color: utils.$race-bg;
+    padding: 5px 10px;
+    font-size: 14px;
+    // background-color: utils.$race-bg;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,8 +28,9 @@
 
     &--actived {
       @extend .schedule__race;
-      background-color: utils.$race-active-bg;
-      color: utils.$race-active-text;
+      background-color: utils.$highlight-bg;
+      color: utils.$highlight-text;
+      font-weight: bold;
     }
 
     &--coming-race {

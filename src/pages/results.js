@@ -39,12 +39,12 @@ const Race = () => {
   // console.log(raceInfo);
 
   return (
-    <Fragment>
-      <RaceResult raceResult={raceResult} raceInfo={raceInfo} />;
+    <div className="race__container">
+      <RaceResult raceResult={raceResult} raceInfo={raceInfo} />
       {year === new Date().getFullYear().toString() && (
         <Schedule raceInfo={raceInfo} />
       )}
-    </Fragment>
+    </div>
   );
 };
 export default Race;

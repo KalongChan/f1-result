@@ -32,10 +32,10 @@ const LastestRace = () => {
   }, [loaded]);
 
   return (
-    <Fragment>
+    <div className="race__container">
       <RaceResult raceResult={raceResult} raceInfo={raceInfo} />
       <Schedule raceInfo={raceInfo} />
-    </Fragment>
+    </div>
   );
 };
 export default LastestRace;
