@@ -3,7 +3,7 @@ var convert = require("xml-js");
 
 import {useState, useEffect, Fragment} from "react";
 import RaceResult from "./RaceResult";
-import raceData from "@/utils/raceData";
+import raceDataProcessing from "@/utils/raceDataProcessing";
 import Schedule from "./Schedule";
 
 const LastestRace = () => {
@@ -18,7 +18,7 @@ const LastestRace = () => {
     var options = {compact: true, ignoreComment: true, spaces: 4};
     const json = convert.xml2js(res.data, options);
     const fetchedData = json.MRData.RaceTable.Race;
-    const formattedData = raceData(fetchedData);
+    const formattedData = raceDataProcessing(fetchedData);
     setRaceInfo(formattedData.raceInfo);
     setRaceResult(formattedData.raceResult);
   };

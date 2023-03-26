@@ -3,7 +3,7 @@ import axios from "axios";
 var convert = require("xml-js");
 import {useRouter} from "next/router";
 import {useState, useEffect, Fragment} from "react";
-import raceData from "@/utils/raceData";
+import raceDataProcessing from "@/utils/raceDataProcessing";
 import Schedule from "@/components/Schedule";
 
 const Race = () => {
@@ -21,7 +21,7 @@ const Race = () => {
       var options = {compact: true, ignoreComment: true, spaces: 4};
       const json = convert.xml2js(res.data, options);
       const fetchedData = json.MRData.RaceTable.Race;
-      const formattedData = raceData(fetchedData);
+      const formattedData = raceDataProcessing(fetchedData);
       setRaceInfo(formattedData.raceInfo);
       setRaceResult(formattedData.raceResult);
     }

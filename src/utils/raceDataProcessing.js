@@ -1,7 +1,7 @@
 var nationalities = require("i18n-nationality");
 nationalities.registerLocale(require("i18n-nationality/langs/en.json"));
 
-const raceData = (data) => {
+const raceDataProcessing = (data) => {
   let raceResult = [];
   let raceInfo = {};
   if (data) {
@@ -41,6 +41,6 @@ const raceData = (data) => {
       round: data._attributes.round,
     };
   }
-  return {raceResult: raceResult, raceInfo: raceInfo};
+  return {raceResult, raceInfo};
 };
-export default raceData;
+export default raceDataProcessing;
