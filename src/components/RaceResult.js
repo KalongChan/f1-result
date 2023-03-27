@@ -2,7 +2,7 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 import {useMemo, useState} from "react";
 import Table from "@/utils/Table";
 
-const RaceResult = ({raceInfo, raceResult}) => {
+const RaceResultTable = ({raceInfo, raceResult}) => {
   const [isMyTime, setIsMyTime] = useState(true);
   const setMyTime = () => {
     setIsMyTime(true);
@@ -121,4 +121,4 @@ const RaceResult = ({raceInfo, raceResult}) => {
     </div>
   );
 };
-export default RaceResult;
+export default RaceResultTable;

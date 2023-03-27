@@ -3,6 +3,11 @@ import DriverStandings from "@/components/DriverStandings";
 import LastestRace from "@/components/LastestRace";
 
 const test = () => {
-  return <ConstructorsStanding />;
+  return (
+    <>
+      <ConstructorsStanding />
+      <DriverStandings />
+    </>
+  );
 };
 export default test;

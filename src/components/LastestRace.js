@@ -2,7 +2,7 @@ import axios from "axios";
 var convert = require("xml-js");
 
 import {useState, useEffect, Fragment} from "react";
-import RaceResult from "./RaceResult";
+import RaceResultTable from "./RaceResult";
 import raceDataProcessing from "@/utils/raceDataProcessing";
 import Schedule from "./Schedule";
 
@@ -33,7 +33,7 @@ const LastestRace = () => {
 
   return (
     <div className="race__container">
-      <RaceResult raceResult={raceResult} raceInfo={raceInfo} />
+      <RaceResultTable raceResult={raceResult} raceInfo={raceInfo} />
       <Schedule raceInfo={raceInfo} />
     </div>
   );

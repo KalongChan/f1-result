@@ -2,12 +2,13 @@ import constructorStandingDataProcessing from "@/utils/constructorStandingDataPr
 import axios from "axios";
 var convert = require("xml-js");
 
-import {useState, useEffect, Fragment} from "react";
+import {useState, useEffect} from "react";
+import ConstructorsStandingTable from "./ConstructorsStandingTable";
 
 const DriverStandings = () => {
   const [loaded, setLoaded] = useState(false);
-  const [constructorsStanding, setConstructorsStanding] = useState({});
-  const [seasonInfo, setSeasonInfo] = useState([]);
+  const [constructorsStanding, setConstructorsStanding] = useState([]);
+  const [seasonInfo, setSeasonInfo] = useState({});
 
   const fetchData = async () => {
     const res = await axios.get(
@@ -21,6 +22,8 @@ const DriverStandings = () => {
     setSeasonInfo(formattedData.seasonInfo);
   };
 
+  console.log(constructorsStanding);
+
   useEffect(() => {
     if (!loaded) {
       setLoaded(true);
@@ -29,6 +32,11 @@ const DriverStandings = () => {
     fetchData();
   }, [loaded]);
 
-  return <div>DriverStandings</div>;
+  return (
+    <ConstructorsStandingTable
+      standings={constructorsStanding}
+      lastUpdated={seasonInfo}
+    />
+  );
 };
 export default DriverStandings;

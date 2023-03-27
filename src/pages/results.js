@@ -1,4 +1,4 @@
-import RaceResult from "@/components/RaceResult";
+import RaceResultTable from "@/components/RaceResult";
 import axios from "axios";
 var convert = require("xml-js");
 import {useRouter} from "next/router";
@@ -40,7 +40,7 @@ const Race = () => {
 
   return (
     <div className="race__container">
-      <RaceResult raceResult={raceResult} raceInfo={raceInfo} />
+      <RaceResultTable raceResult={raceResult} raceInfo={raceInfo} />
       {year === new Date().getFullYear().toString() && (
         <Schedule raceInfo={raceInfo} />
       )}
