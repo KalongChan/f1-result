@@ -29,15 +29,7 @@
 
       &--active {
         @extend .standing__mode-button;
-        &:after {
-          content: "\200b";
-          position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background-color: utils.$highlight-bg;
-        }
+        @include utils.underline;
       }
     }
   }

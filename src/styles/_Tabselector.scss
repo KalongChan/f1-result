@@ -1,0 +1,26 @@
+@use "./utils.scss";
+
+.selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__selection {
+    margin-right: 10px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    position: relative;
+
+    &:last-child {
+      margin-right: 0px;
+    }
+    &:first-letter {
+      text-transform: capitalize;
+    }
+
+    &--active {
+      @extend .selector__selection;
+      @include utils.underline;
+    }
+  }
+}

@@ -14,6 +14,10 @@
   // flex-basis: 20%;
   flex-shrink: 0; // white-space: nowrap;
 
+  @include utils.middle {
+    height: 100%;
+  }
+
   &__race {
     // height: 100%;
     // width: 300px;
