@@ -2,14 +2,14 @@ import axios from "axios";
 var convert = require("xml-js");
 
 import {useState, useEffect, Fragment} from "react";
-import RaceResultTable from "./RaceResult";
+import RaceResultTable from "./RaceResultTable";
 import raceDataProcessing from "@/utils/raceDataProcessing";
 import Schedule from "./Schedule";
 import TabSelector from "./TabSelector";
 
 const LastestRace = () => {
   const [loaded, setLoaded] = useState(false);
-  const [raceInfo, setRaceInfo] = useState({});
+  const [raceInfo, setRaceInfo] = useState();
   const [raceResult, setRaceResult] = useState([]);
 
   const fetchData = async () => {

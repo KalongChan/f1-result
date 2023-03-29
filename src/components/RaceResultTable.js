@@ -73,6 +73,10 @@ const RaceResultTable = ({raceInfo, raceResult}) => {
     []
   );
 
+  // if (!raceInfo) {
+  //   return;
+  // }
+
   const date = new Date(Date.parse(`${raceInfo.date} ${raceInfo.time}`));
   const month = date.getMonth() + 1;
   const localDate = `${date.getFullYear().toString().padStart(2, 0)}-${month
@@ -82,17 +86,18 @@ const RaceResultTable = ({raceInfo, raceResult}) => {
     .getMinutes()
     .toString()
     .padStart(2, 0)}:${date.getSeconds().toString().padStart(2, 0)}`;
+  console.log(raceInfo);
 
   return (
     <div className="race">
       <div className="race__info">
-        <div className="race__info-racename">{raceInfo.raceName}</div>
-        <div className="race__info-circuit">{raceInfo.circuit}</div>
+        <div className="race__info-racename">{raceInfo?.raceName}</div>
+        <div className="race__info-circuit">{raceInfo?.circuit}</div>
         <div className="race__info-racetime-wrapper">
           <div className="race__info-racetime">
             {isMyTime
               ? `${localDate} ${localTime}`
-              : `${raceInfo.date} ${raceInfo.time?.replace("Z", "")}`}
+              : `${raceInfo?.date} ${raceInfo?.time?.replace("Z", "")}`}
           </div>
           <div
             onClick={setMyTime}
@@ -112,7 +117,8 @@ const RaceResultTable = ({raceInfo, raceResult}) => {
           </div>
         </div>
         <div className="race__info-location">
-          {raceInfo.location},{raceInfo.country} {raceInfo.lat},{raceInfo.long}
+          {raceInfo?.location},{raceInfo?.country} {raceInfo?.lat},
+          {raceInfo?.long}
         </div>
       </div>
       <div className="race__result">

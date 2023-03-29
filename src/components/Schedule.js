@@ -3,19 +3,23 @@ import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 var convert = require("xml-js");
 
-const Schedule = ({raceInfo}) => {
-  const [loaded, setLoaded] = useState(false);
-  const [schedule, setSchedule] = useState();
-  const [parseRaceTime, setParseRaceTime] = useState();
+const Schedule = ({raceInfo, schedule, parseRaceTime, enableFetch}) => {
+  const [firstRender, setFirstRender] = useState(false);
+  const [selfFetchSchedule, setSelfFetchSchedule] = useState();
+  const [selfFetchParaseRaceTime, setSelfFetchParaseRaceTime] = useState();
+  // const [schedule, setSchedule] = useState();
+  // const [parseRaceTime, setParseRaceTime] = useState();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loaded) {
-      setLoaded(true);
+    if (!firstRender) {
+      setFirstRender(true);
       return;
     }
-    fetchData();
-  }, [loaded]);
+    if (enableFetch) {
+      fetchData();
+    }
+  }, [firstRender]);
 
   const fetchData = async () => {
     const res = await axios.get("http://ergast.com/api/f1/current");
@@ -26,8 +30,10 @@ const Schedule = ({raceInfo}) => {
     data.map((race) => {
       parseRaceTime.push(Date.parse(new Date(race.Date._text)));
     });
-    setSchedule(data);
-    setParseRaceTime(parseRaceTime);
+    // setSchedule(data);
+    // setParseRaceTime(parseRaceTime);
+    setSelfFetchSchedule(data);
+    setSelfFetchParaseRaceTime(parseRaceTime);
   };
 
   const handleClick = (time, race) => {
@@ -42,6 +48,33 @@ const Schedule = ({raceInfo}) => {
   const isActive = (index) => {
     return index === router.query.round - 1 || index === raceInfo?.round - 1;
   };
+
+  if (enableFetch) {
+    return (
+      <div className="schedule">
+        {selfFetchSchedule?.map((race, index) => (
+          <div
+            className={`schedule__race${
+              selfFetchParaseRaceTime[index] > Date.now() ? "--coming-race" : ""
+            }${isActive(index) ? "--actived" : ""}`}
+            key={index}
+            onClick={() => handleClick(selfFetchParaseRaceTime[index], race)}
+          >
+            <div className="schedule__race-flag">
+              <img
+                src={`countryflags/${race.Circuit.Location.Country._text}.svg`}
+                alt=""
+              />
+            </div>
+            <div className="schedule__race-info">
+              <div className="schedule__race-title">{race.RaceName._text}</div>
+              <div className="schedule__race-date">{race.Date._text}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="schedule">
