@@ -6,6 +6,8 @@ import {useState, useEffect, Fragment} from "react";
 import raceDataProcessing from "@/utils/raceDataProcessing";
 import Schedule from "@/components/Schedule";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import NotUpdated from "@/components/NotUpdated";
+import TabSelector from "@/components/TabSelector";
 
 const Race = () => {
   const [firstRender, setFirstRender] = useState(false);
@@ -32,6 +34,10 @@ const Race = () => {
     }
   };
 
+  const resetLoading = () => {
+    setLoading(true);
+  };
+
   useEffect(() => {
     if (!firstRender) {
       setFirstRender(true);
@@ -40,26 +46,86 @@ const Race = () => {
     fetchData();
   }, [firstRender, year, round]);
 
-  // console.log(raceResult);
-  // console.log(raceInfo);
+  //Desktop && Mobile mode checker
+  const [mode, setMode] = useState("");
+  const handleWindowResize = () => {
+    if (window.innerWidth > 1280) {
+      setMode("desktop");
+    } else {
+      setMode("mobile");
+    }
+  };
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      handleWindowResize();
+      window.addEventListener("resize", handleWindowResize);
+    }
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [handleWindowResize]);
+
+  //Render for <1280px width
+  const [displayCategory, setDisplayCategory] = useState("result");
+  const modeHandler = (modeSelected) => {
+    setDisplayCategory(modeSelected);
+  };
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  }, []);
+  }, [loading]);
 
   if (!raceInfo || !raceResult || loading) {
     return <LoadingSpinner />;
   }
 
-  return (
-    <div className="race__container">
-      <RaceResultTable raceResult={raceResult} raceInfo={raceInfo} />
-      {year === new Date().getFullYear().toString() && (
-        <Schedule raceInfo={raceInfo} enableFetch={true} />
-      )}
-    </div>
-  );
+  const selectorData = ["result", "schedule"];
+  if (mode === "mobile") {
+    return (
+      <div className="race__container">
+        {raceResult && (
+          <Fragment>
+            <TabSelector
+              selectorData={selectorData}
+              modeHandler={modeHandler}
+            />
+            {displayCategory === "result" && (
+              <RaceResultTable raceResult={raceResult} raceInfo={raceInfo} />
+            )}
+            {displayCategory === "schedule" && (
+              <Schedule
+                raceInfo={raceInfo}
+                enableFetch={true}
+                resetLoading={resetLoading}
+              />
+            )}
+          </Fragment>
+        )}
+      </div>
+    );
+  }
+
+  if (mode === "desktop") {
+    return (
+      <div className="race__container">
+        {raceResult.length > 0 && Object.keys(raceInfo).length > 0 && (
+          <RaceResultTable raceResult={raceResult} raceInfo={raceInfo} />
+        )}
+        {raceResult.length <= 0 && Object.keys(raceInfo).length <= 0 && (
+          <NotUpdated />
+        )}
+
+        {year === new Date().getFullYear().toString() && (
+          <Schedule
+            raceInfo={raceInfo}
+            enableFetch={true}
+            resetLoading={resetLoading}
+          />
+        )}
+      </div>
+    );
+  }
 };
 export default Race;

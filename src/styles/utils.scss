@@ -3,6 +3,7 @@ $secondary: #444;
 $highlight-bg: #fed766;
 $highlight-text: #272727;
 $bg-color: #272727;
+$scroll-bar-width: 12px;
 
 @mixin middle {
   @media (max-width: 1280px) {

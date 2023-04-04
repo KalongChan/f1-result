@@ -22,7 +22,7 @@ const DriverStandings = () => {
     setSeasonInfo(formattedData.seasonInfo);
   };
 
-  console.log(constructorsStanding);
+  // console.log(constructorsStanding);
 
   useEffect(() => {
     if (!loaded) {

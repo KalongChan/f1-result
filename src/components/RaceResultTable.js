@@ -86,7 +86,7 @@ const RaceResultTable = ({raceInfo, raceResult}) => {
     .getMinutes()
     .toString()
     .padStart(2, 0)}:${date.getSeconds().toString().padStart(2, 0)}`;
-  console.log(raceInfo);
+  // console.log(raceInfo);
 
   return (
     <div className="race">

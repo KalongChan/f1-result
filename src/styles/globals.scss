@@ -16,11 +16,17 @@
 * {
   scrollbar-width: auto;
   scrollbar-color: utils.$bg-color utils.$primary;
+  @include utils.mobile {
+    scrollbar-width: none;
+  }
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 12px;
+  width: utils.$scroll-bar-width;
+  @include utils.mobile {
+    display: none;
+  }
 }
 
 *::-webkit-scrollbar-track {
@@ -48,7 +54,7 @@ a {
 
 .home {
   &__container {
-    height: 100vh;
+    height: 100%;
     padding: 0 10%;
 
     @include utils.mobile {
