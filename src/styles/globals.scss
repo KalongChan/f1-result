@@ -3,7 +3,7 @@
 @use "./Schedule";
 @use "./Standings.scss";
 @use "./Tabselector.scss";
-
+@use "./Navbar.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
 * {
@@ -45,6 +45,7 @@ body {
   font-family: Poppins, sans-serif;
   color: utils.$primary;
   background-color: utils.$bg-color;
+  overflow-y: scroll;
 }
 
 a {

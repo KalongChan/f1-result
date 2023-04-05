@@ -12,7 +12,6 @@ import TabSelector from "@/components/TabSelector";
 const Race = () => {
   const [firstRender, setFirstRender] = useState(false);
   const [loading, setLoading] = useState(true);
-  // const [isFetching, setIsFetching] = useState(false);
   const [raceInfo, setRaceInfo] = useState();
   const [raceResult, setRaceResult] = useState();
   const router = useRouter();
@@ -20,7 +19,6 @@ const Race = () => {
 
   const fetchData = async () => {
     if (year && round) {
-      // setIsFetching(true);
       const res = await axios.get(
         `http://ergast.com/api/f1/${year}/${round}/results`
       );
@@ -30,7 +28,6 @@ const Race = () => {
       const formattedData = raceDataProcessing(fetchedData);
       setRaceInfo(formattedData.raceInfo);
       setRaceResult(formattedData.raceResult);
-      // setIsFetching(false);
     }
   };
 

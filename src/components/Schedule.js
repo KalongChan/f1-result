@@ -13,8 +13,6 @@ const Schedule = ({
   const [firstRender, setFirstRender] = useState(false);
   const [selfFetchSchedule, setSelfFetchSchedule] = useState();
   const [selfFetchParaseRaceTime, setSelfFetchParaseRaceTime] = useState();
-  // const [schedule, setSchedule] = useState();
-  // const [parseRaceTime, setParseRaceTime] = useState();
   const router = useRouter();
 
   useEffect(() => {
@@ -36,8 +34,6 @@ const Schedule = ({
     data.map((race) => {
       parseRaceTime.push(Date.parse(new Date(race.Date._text)));
     });
-    // setSchedule(data);
-    // setParseRaceTime(parseRaceTime);
     setSelfFetchSchedule(data);
     setSelfFetchParaseRaceTime(parseRaceTime);
   };

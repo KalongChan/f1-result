@@ -5,7 +5,8 @@
   width: calc(300px - utils.$scroll-bar-width);
 
   &__container {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     height: 100%;
     flex-shrink: 0;
     margin-top: auto;
@@ -13,7 +14,7 @@
 
   @include utils.middle {
     width: 100%;
-    height: calc(100vh - 80px); //100vh - header height
+    height: calc(100vh); //100vh - header height
     display: flex;
     flex-wrap: wrap;
   }
