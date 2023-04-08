@@ -30,7 +30,9 @@ const Navbar = () => {
       {/* Desktop Nav */}
       {mode === "desktop" && (
         <Fragment>
-          <div className="navbar__title">F1 Result App</div>
+          <div className="navbar__title" onClick={() => router.push("/")}>
+            F1 Result App
+          </div>
           <div className="navbar__list">
             <ul>
               <li
@@ -59,6 +61,9 @@ const Navbar = () => {
       {/* Mobile Nav */}
       {mode === "mobile" && (
         <div className="navbar-mobile">
+          <div className="navbar__title" onClick={() => router.push("/")}>
+            F1 Result App
+          </div>
           <div className={`hamburger-container`} onClick={menuHandler}>
             <div
               className={`navbar-mobile__hamburger${

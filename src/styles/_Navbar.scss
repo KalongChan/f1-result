@@ -9,13 +9,10 @@
   //   position: sticky;
   //   top: 0;
 
-  @include utils.middle {
-    justify-content: flex-end;
-  }
-
   &__title {
     font-size: 32px;
     font-weight: bold;
+    cursor: pointer;
   }
 
   &__list {
@@ -152,17 +149,25 @@
 //slide menu
 .navbar-mobile {
   display: none;
+  width: 100%;
+
+  &-title {
+    cursor: pointer;
+  }
 
   @include utils.middle {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   &__slide-menu {
     position: fixed;
     top: 0;
     right: 0;
-    width: 300px;
+    width: 30%;
     height: 100vh;
+    min-width: 300px;
     background-color: #333;
     transform: translateX(100%);
     transition: all 0.3s ease-in-out;
