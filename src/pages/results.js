@@ -8,6 +8,7 @@ import Schedule from "@/components/Schedule";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import NotUpdated from "@/components/NotUpdated";
 import TabSelector from "@/components/TabSelector";
+import useDisplayMode from "@/utils/useDisplayMode";
 
 const Race = () => {
   const [firstRender, setFirstRender] = useState(false);
@@ -16,6 +17,7 @@ const Race = () => {
   const [raceResult, setRaceResult] = useState();
   const router = useRouter();
   const {year, round} = router.query;
+  const mode = useDisplayMode();
 
   const fetchData = async () => {
     if (year && round) {
@@ -42,25 +44,6 @@ const Race = () => {
     }
     fetchData();
   }, [firstRender, year, round]);
-
-  //Desktop && Mobile mode checker
-  const [mode, setMode] = useState("");
-  const handleWindowResize = () => {
-    if (window.innerWidth > 1280) {
-      setMode("desktop");
-    } else {
-      setMode("mobile");
-    }
-  };
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      handleWindowResize();
-      window.addEventListener("resize", handleWindowResize);
-    }
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, [handleWindowResize]);
 
   //Render for <1280px width
   const [displayCategory, setDisplayCategory] = useState("result");

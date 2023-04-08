@@ -6,15 +6,17 @@ import RaceResultTable from "../components/RaceResultTable";
 import raceDataProcessing from "@/utils/raceDataProcessing";
 import Schedule from "../components/Schedule";
 import TabSelector from "../components/TabSelector";
+import useDisplayMode from "@/utils/useDisplayMode";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
-const LastestRace = () => {
+const index = () => {
   const [firstRender, setFirstRender] = useState(false);
   const [loading, setLoading] = useState(true);
   const [raceInfo, setRaceInfo] = useState();
   const [raceResult, setRaceResult] = useState();
   const [schedule, setSchedule] = useState();
   const [parseRaceTime, setParseRaceTime] = useState();
+  const mode = useDisplayMode();
 
   const fetchData = async () => {
     const res = await axios.get(
@@ -46,25 +48,6 @@ const LastestRace = () => {
     }
     fetchData();
   }, [firstRender]);
-
-  //Desktop && Mobile mode checker
-  const [mode, setMode] = useState("");
-  const handleWindowResize = () => {
-    if (window.innerWidth > 1280) {
-      setMode("desktop");
-    } else {
-      setMode("mobile");
-    }
-  };
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      handleWindowResize();
-      window.addEventListener("resize", handleWindowResize);
-    }
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, [handleWindowResize]);
 
   //Render for <1280px width
   const [displayCategory, setDisplayCategory] = useState("result");
@@ -127,4 +110,4 @@ const LastestRace = () => {
     );
   }
 };
-export default LastestRace;
+export default index;
