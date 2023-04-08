@@ -64,7 +64,11 @@ const Schedule = ({
                 selfFetchParaseRaceTime[index] > Date.now()
                   ? "--coming-race"
                   : ""
-              }${isActive(index) ? "--actived" : ""}`}
+              }${
+                isActive(index) && selfFetchParaseRaceTime[index] < Date.now()
+                  ? "--actived"
+                  : ""
+              }`}
               key={index}
               onClick={() => handleClick(selfFetchParaseRaceTime[index], race)}
             >

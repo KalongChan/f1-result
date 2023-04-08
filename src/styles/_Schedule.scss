@@ -1,8 +1,9 @@
 @use "./utils.scss";
 
 .schedule {
-  height: 800px;
+  height: 750px;
   width: calc(300px - utils.$scroll-bar-width);
+  padding: 20px 0;
 
   &__container {
     overflow-y: auto;

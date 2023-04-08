@@ -15,7 +15,13 @@ function Table({columns, data}) {
         {headerGroups.map((headerGroup, i) => (
           <tr {...headerGroup.getHeaderGroupProps()} key={i}>
             {headerGroup.headers.map((column, j) => (
-              <th {...column.getHeaderProps()} key={j}>
+              <th
+                {...column.getHeaderProps()}
+                key={j}
+                className={`race__result-${
+                  column.Header.toLowerCase().split("/")[0]
+                }`}
+              >
                 {column.render("Header")}
               </th>
             ))}
@@ -29,7 +35,14 @@ function Table({columns, data}) {
             <tr {...row.getRowProps()} key={i}>
               {row.cells.map((cell, j) => {
                 return (
-                  <td {...cell.getCellProps()} key={j}>
+                  <td
+                    {...cell.getCellProps()}
+                    key={j}
+                    className={`race__result-${
+                      cell.column.Header.toLowerCase().split("/")[0]
+                    }`}
+                    onClick={() => console.log(cell)}
+                  >
                     {cell.render("Cell")}
                   </td>
                 );

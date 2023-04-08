@@ -8,6 +8,7 @@ import Schedule from "../components/Schedule";
 import TabSelector from "../components/TabSelector";
 import useDisplayMode from "@/utils/useDisplayMode";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RaceInfo from "@/components/RaceInfo";
 
 const index = () => {
   const [firstRender, setFirstRender] = useState(false);
@@ -70,23 +71,29 @@ const index = () => {
     return (
       <div className="race__container">
         {raceResult && schedule && (
-          <Fragment>
+          <div className="race">
+            {displayCategory === "result" && <RaceInfo raceInfo={raceInfo} />}
+
             <TabSelector
               selectorData={selectorData}
               modeHandler={modeHandler}
             />
+
             {displayCategory === "result" && (
-              <RaceResultTable raceResult={raceResult} raceInfo={raceInfo} />
+              <RaceResultTable raceResult={raceResult} />
             )}
+
             {displayCategory === "schedule" && (
-              <Schedule
-                raceInfo={raceInfo}
-                schedule={schedule}
-                parseRaceTime={parseRaceTime}
-                enableFetch={false}
-              />
+              <Fragment>
+                <Schedule
+                  raceInfo={raceInfo}
+                  schedule={schedule}
+                  parseRaceTime={parseRaceTime}
+                  enableFetch={false}
+                />
+              </Fragment>
             )}
-          </Fragment>
+          </div>
         )}
       </div>
     );
@@ -97,7 +104,10 @@ const index = () => {
       <div className="race__container">
         {raceResult && schedule && (
           <Fragment>
-            <RaceResultTable raceResult={raceResult} raceInfo={raceInfo} />
+            <div className="race">
+              <RaceInfo raceInfo={raceInfo} />
+              <RaceResultTable raceResult={raceResult} />
+            </div>
             <Schedule
               raceInfo={raceInfo}
               schedule={schedule}

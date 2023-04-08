@@ -9,6 +9,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import NotUpdated from "@/components/NotUpdated";
 import TabSelector from "@/components/TabSelector";
 import useDisplayMode from "@/utils/useDisplayMode";
+import RaceInfo from "@/components/RaceInfo";
 
 const Race = () => {
   const [firstRender, setFirstRender] = useState(false);
@@ -65,14 +66,15 @@ const Race = () => {
   if (mode === "mobile") {
     return (
       <div className="race__container">
-        {raceResult && (
-          <Fragment>
+        {raceResult.length > 0 && Object.keys(raceInfo).length > 0 && (
+          <div className="race">
+            {displayCategory === "result" && <RaceInfo raceInfo={raceInfo} />}
             <TabSelector
               selectorData={selectorData}
               modeHandler={modeHandler}
             />
             {displayCategory === "result" && (
-              <RaceResultTable raceResult={raceResult} raceInfo={raceInfo} />
+              <RaceResultTable raceResult={raceResult} />
             )}
             {displayCategory === "schedule" && (
               <Schedule
@@ -81,7 +83,10 @@ const Race = () => {
                 resetLoading={resetLoading}
               />
             )}
-          </Fragment>
+          </div>
+        )}
+        {raceResult.length <= 0 && Object.keys(raceInfo).length <= 0 && (
+          <NotUpdated />
         )}
       </div>
     );
@@ -91,7 +96,10 @@ const Race = () => {
     return (
       <div className="race__container">
         {raceResult.length > 0 && Object.keys(raceInfo).length > 0 && (
-          <RaceResultTable raceResult={raceResult} raceInfo={raceInfo} />
+          <div className="race">
+            <RaceInfo raceInfo={raceInfo} />
+            <RaceResultTable raceResult={raceResult} />
+          </div>
         )}
         {raceResult.length <= 0 && Object.keys(raceInfo).length <= 0 && (
           <NotUpdated />
