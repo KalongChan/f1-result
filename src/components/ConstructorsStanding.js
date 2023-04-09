@@ -4,9 +4,11 @@ var convert = require("xml-js");
 
 import {useState, useEffect} from "react";
 import ConstructorsStandingTable from "./ConstructorsStandingTable";
+import LoadingSpinner from "./LoadingSpinner";
 
 const DriverStandings = () => {
-  const [loaded, setLoaded] = useState(false);
+  const [firstRender, setFirstRender] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [constructorsStanding, setConstructorsStanding] = useState([]);
   const [seasonInfo, setSeasonInfo] = useState({});
 
@@ -22,15 +24,24 @@ const DriverStandings = () => {
     setSeasonInfo(formattedData.seasonInfo);
   };
 
-  // console.log(constructorsStanding);
-
   useEffect(() => {
-    if (!loaded) {
-      setLoaded(true);
+    if (!firstRender) {
+      setFirstRender(true);
       return;
     }
+
+    let timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
     fetchData();
-  }, [loaded]);
+
+    return () => clearTimeout(timer);
+  }, [firstRender]);
+
+  if (!constructorsStanding || !seasonInfo || loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <ConstructorsStandingTable

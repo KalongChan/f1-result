@@ -43,7 +43,14 @@ const Race = () => {
       setFirstRender(true);
       return;
     }
+
+    let timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
     fetchData();
+
+    return () => clearTimeout(timer);
   }, [firstRender, year, round]);
 
   //Render for <1280px width

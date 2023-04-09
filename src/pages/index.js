@@ -47,7 +47,14 @@ const index = () => {
       setFirstRender(true);
       return;
     }
+
+    let timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
     fetchData();
+
+    return () => clearTimeout(timer);
   }, [firstRender]);
 
   //Render for <1280px width
@@ -55,12 +62,6 @@ const index = () => {
   const modeHandler = (modeSelected) => {
     setDisplayCategory(modeSelected);
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
 
   if (!raceInfo || !raceResult || !schedule || loading) {
     return <LoadingSpinner />;
