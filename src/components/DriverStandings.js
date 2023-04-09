@@ -5,12 +5,13 @@ var convert = require("xml-js");
 import {useState, useEffect, Fragment} from "react";
 import DriverStandingsTable from "./DriverStandingsTable";
 import LoadingSpinner from "./LoadingSpinner";
+import raceDataProcessing from "@/utils/raceDataProcessing";
 
 const DriverStandings = () => {
   const [firstRender, setFirstRender] = useState(false);
   const [loading, setLoading] = useState(true);
   const [driverStandings, setDriverStandings] = useState([]);
-  const [seasonInfo, setSeasonInfo] = useState({});
+  const [lastUpdated, setLastUpdated] = useState({});
 
   const fetchData = async () => {
     const res = await axios.get(
@@ -21,7 +22,15 @@ const DriverStandings = () => {
     const fetchedData = json.MRData.StandingsTable.StandingsList;
     const formattedData = driverStandingsDataProcess(fetchedData);
     setDriverStandings(formattedData.driverStandings);
-    setSeasonInfo(formattedData.seasonInfo);
+    // setSeasonInfo(formattedData.seasonInfo);
+
+    const lastUpdatedRes = await axios.get(
+      "http://ergast.com/api/f1/current/last/results"
+    );
+    const lastUpdatedJson = convert.xml2js(lastUpdatedRes.data, options);
+    const lastUpdatedFetchedData = lastUpdatedJson.MRData.RaceTable.Race;
+    const formattedLastUpdated = raceDataProcessing(lastUpdatedFetchedData);
+    setLastUpdated(formattedLastUpdated.raceInfo);
   };
 
   useEffect(() => {
@@ -39,14 +48,14 @@ const DriverStandings = () => {
     return () => clearTimeout(timer);
   }, [firstRender]);
 
-  if (!driverStandings || !seasonInfo || loading) {
+  if (!driverStandings || !lastUpdated || loading) {
     return <LoadingSpinner />;
   }
 
   return (
     <DriverStandingsTable
       standings={driverStandings}
-      lastUpdated={seasonInfo}
+      lastUpdated={lastUpdated}
     />
   );
 };

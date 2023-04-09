@@ -110,6 +110,9 @@
     &-constructor,
     &-time {
       width: 150px;
+    }
+
+    &-time {
       @include utils.smallTable {
         width: 120px;
       }

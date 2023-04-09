@@ -8,41 +8,31 @@ const ConstructorsStandingTable = ({standings, lastUpdated}) => {
       {
         Header: "Pos",
         accessor: "position",
-        Cell: ({row}) => (
-          <div className="race__result-position">{row.values.position}</div>
-        ),
+        Cell: ({row}) => row.values.position,
       },
       {
         Header: "Constructor",
         accessor: "constructor",
-        Cell: ({row}) => (
-          <div className="race__result-constructor">
-            {row.values.constructor}
-          </div>
-        ),
+        Cell: ({row}) => row.values.constructor,
       },
       {
         Header: "Wins",
         accessor: "wins",
-        Cell: ({row}) => (
-          <div className="race__result-laps">{row.values.wins}</div>
-        ),
+        Cell: ({row}) => row.values.wins,
       },
       {
         Header: "Points",
         accessor: "points",
-        Cell: ({row}) => (
-          <div className="race__result-points">{row.values.points}</div>
-        ),
+        Cell: ({row}) => row.values.points,
       },
     ],
     []
   );
   return (
     <Fragment>
-      <Table columns={columns} data={[...standings]} />
+      <Table columns={columns} data={[...standings]} type={"standing__table"} />
       <div className="standing__lastupdated">
-        As of Season {lastUpdated.season} Round {lastUpdated.round}
+        Last updated: {lastUpdated.date}
       </div>
     </Fragment>
   );

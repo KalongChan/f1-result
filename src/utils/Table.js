@@ -1,6 +1,6 @@
 import {useTable} from "react-table";
 
-function Table({columns, data}) {
+function Table({columns, data, type}) {
   // Use the state and functions returned from useTable to build your UI
   const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} =
     useTable({
@@ -18,7 +18,7 @@ function Table({columns, data}) {
               <th
                 {...column.getHeaderProps()}
                 key={j}
-                className={`race__result-${
+                className={`${type}-${
                   column.Header.toLowerCase().split("/")[0]
                 }`}
               >
@@ -38,10 +38,9 @@ function Table({columns, data}) {
                   <td
                     {...cell.getCellProps()}
                     key={j}
-                    className={`race__result-${
+                    className={`${type}-${
                       cell.column.Header.toLowerCase().split("/")[0]
                     }`}
-                    onClick={() => console.log(cell)}
                   >
                     {cell.render("Cell")}
                   </td>
