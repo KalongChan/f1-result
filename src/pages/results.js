@@ -75,21 +75,26 @@ const Race = () => {
       <div className="race__container">
         {raceResult.length > 0 && Object.keys(raceInfo).length > 0 && (
           <div className="race">
-            {displayCategory === "result" && <RaceInfo raceInfo={raceInfo} />}
-            <TabSelector
-              selectorData={selectorData}
-              modeHandler={modeHandler}
-            />
-            {displayCategory === "result" && (
-              <RaceResultTable raceResult={raceResult} />
-            )}
-            {displayCategory === "schedule" && (
-              <Schedule
-                raceInfo={raceInfo}
-                enableFetch={true}
-                resetLoading={resetLoading}
+            <div className="race__upper">
+              {displayCategory === "result" && <RaceInfo raceInfo={raceInfo} />}
+              <TabSelector
+                selectorData={selectorData}
+                modeHandler={modeHandler}
               />
-            )}
+            </div>
+
+            <div className="race__lower">
+              {displayCategory === "result" && (
+                <RaceResultTable raceResult={raceResult} />
+              )}
+              {displayCategory === "schedule" && (
+                <Schedule
+                  raceInfo={raceInfo}
+                  enableFetch={true}
+                  resetLoading={resetLoading}
+                />
+              )}
+            </div>
           </div>
         )}
         {raceResult.length <= 0 && Object.keys(raceInfo).length <= 0 && (
@@ -102,22 +107,38 @@ const Race = () => {
   if (mode === "desktop") {
     return (
       <div className="race__container">
-        {raceResult.length > 0 && Object.keys(raceInfo).length > 0 && (
-          <div className="race">
-            <RaceInfo raceInfo={raceInfo} />
-            <RaceResultTable raceResult={raceResult} />
-          </div>
-        )}
         {raceResult.length <= 0 && Object.keys(raceInfo).length <= 0 && (
           <NotUpdated />
         )}
 
-        {year === new Date().getFullYear().toString() && (
-          <Schedule
-            raceInfo={raceInfo}
-            enableFetch={true}
-            resetLoading={resetLoading}
-          />
+        {raceResult.length > 0 && Object.keys(raceInfo).length > 0 && (
+          <div className="race">
+            <div className="race__upper">
+              <div className="race__upper-left">
+                <RaceInfo raceInfo={raceInfo} />
+              </div>
+              <div className="race__upper-right">
+                <div className="race__track-layout">
+                  <img src={`circuit/${raceInfo.round}.png`} />
+                </div>
+              </div>
+            </div>
+
+            <div className="race__lower">
+              <div className="race__lower-left">
+                <RaceResultTable raceResult={raceResult} />
+              </div>
+              <div className="race__lower-right">
+                {year === new Date().getFullYear().toString() && (
+                  <Schedule
+                    raceInfo={raceInfo}
+                    enableFetch={true}
+                    resetLoading={resetLoading}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
         )}
       </div>
     );

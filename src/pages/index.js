@@ -73,27 +73,31 @@ const index = () => {
       <div className="race__container">
         {raceResult && schedule && (
           <div className="race">
-            {displayCategory === "result" && <RaceInfo raceInfo={raceInfo} />}
+            <div className="race__upper">
+              {displayCategory === "result" && <RaceInfo raceInfo={raceInfo} />}
 
-            <TabSelector
-              selectorData={selectorData}
-              modeHandler={modeHandler}
-            />
+              <TabSelector
+                selectorData={selectorData}
+                modeHandler={modeHandler}
+              />
+            </div>
 
-            {displayCategory === "result" && (
-              <RaceResultTable raceResult={raceResult} />
-            )}
+            <div className="race__lower">
+              {displayCategory === "result" && (
+                <RaceResultTable raceResult={raceResult} />
+              )}
 
-            {displayCategory === "schedule" && (
-              <Fragment>
-                <Schedule
-                  raceInfo={raceInfo}
-                  schedule={schedule}
-                  parseRaceTime={parseRaceTime}
-                  enableFetch={false}
-                />
-              </Fragment>
-            )}
+              {displayCategory === "schedule" && (
+                <Fragment>
+                  <Schedule
+                    raceInfo={raceInfo}
+                    schedule={schedule}
+                    parseRaceTime={parseRaceTime}
+                    enableFetch={false}
+                  />
+                </Fragment>
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -104,18 +108,31 @@ const index = () => {
     return (
       <div className="race__container">
         {raceResult && schedule && (
-          <Fragment>
-            <div className="race">
-              <RaceInfo raceInfo={raceInfo} />
-              <RaceResultTable raceResult={raceResult} />
+          <div className="race">
+            <div className="race__upper">
+              <div className="race__upper-left">
+                <RaceInfo raceInfo={raceInfo} />
+              </div>
+              <div className="race__upper-right">
+                <div className="race__track-layout">
+                  <img src={`circuit/${raceInfo.round}.png`} />
+                </div>
+              </div>
             </div>
-            <Schedule
-              raceInfo={raceInfo}
-              schedule={schedule}
-              parseRaceTime={parseRaceTime}
-              enableFetch={false}
-            />
-          </Fragment>
+            <div className="race__lower">
+              <div className="race__lower-left">
+                <RaceResultTable raceResult={raceResult} />
+              </div>
+              <div className="race__lower-right">
+                <Schedule
+                  raceInfo={raceInfo}
+                  schedule={schedule}
+                  parseRaceTime={parseRaceTime}
+                  enableFetch={false}
+                />
+              </div>
+            </div>
+          </div>
         )}
       </div>
     );

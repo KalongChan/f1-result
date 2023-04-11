@@ -48,8 +48,7 @@ const RaceInfo = ({raceInfo}) => {
         </div>
       </div>
       <div className="race__info-location">
-        {raceInfo?.location},{raceInfo?.country} {raceInfo?.lat},
-        {raceInfo?.long}
+        {raceInfo?.location},&nbsp;{raceInfo?.country}
       </div>
     </div>
   );
