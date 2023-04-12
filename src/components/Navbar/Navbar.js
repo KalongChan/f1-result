@@ -1,4 +1,4 @@
-import useDisplayMode from "@/utils/useDisplayMode";
+import useDisplayMode from "@/hooks/useDisplayMode";
 import {useRouter} from "next/router";
 import {Fragment, useEffect, useState} from "react";
 

@@ -1,4 +1,4 @@
-const constructorStandingDataProcessing = (data) => {
+const constructorStandingDataFormatter = (data) => {
   let constructorStanding = [];
   let seasonInfo = {};
   if (data) {
@@ -18,4 +18,4 @@ const constructorStandingDataProcessing = (data) => {
   }
   return {constructorStanding, seasonInfo};
 };
-export default constructorStandingDataProcessing;
+export default constructorStandingDataFormatter;

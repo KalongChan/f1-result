@@ -1,4 +1,4 @@
-import Standings from "@/components/Standings";
+import Standings from "@/components/Standings/Standings";
 
 const standings = () => {
   return <Standings />;

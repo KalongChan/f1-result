@@ -1,5 +1,5 @@
-import DriverStandings from "@/components/DriverStandings";
-import ConstructorsStanding from "@/components/ConstructorsStanding";
+import DriverStandings from "@/components/Standings/DriverStanding/DriverStanding";
+import ConstructorsStanding from "@/components/Standings/ConstructorStanding/ConstructorStanding";
 import {useState} from "react";
 
 const Standings = () => {

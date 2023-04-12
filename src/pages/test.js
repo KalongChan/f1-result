@@ -1,7 +1,7 @@
-import ConstructorsStanding from "@/components/ConstructorsStanding";
-import DriverStandings from "@/components/DriverStandings";
+import ConstructorsStanding from "@/components/Standings/ConstructorStanding/ConstructorStanding";
+import DriverStandings from "@/components/Standings/DriverStanding/DriverStanding";
 import LastestRace from "@/components/LastestRace";
-import TabSelector from "@/components/TabSelector";
+import TabSelector from "@/components/ui/TabSelector";
 import {Fragment, useState} from "react";
 
 const test = () => {

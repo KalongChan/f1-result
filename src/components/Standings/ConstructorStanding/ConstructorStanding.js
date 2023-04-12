@@ -1,35 +1,34 @@
-import driverStandingsDataProcess from "@/utils/driverStandingsDataProcess";
+import constructorStandingDataFormatter from "@/utils/constructorStandingDataFormatter";
 import axios from "axios";
 var convert = require("xml-js");
 
-import {useState, useEffect, Fragment} from "react";
-import DriverStandingsTable from "./DriverStandingsTable";
-import LoadingSpinner from "./LoadingSpinner";
-import raceDataProcessing from "@/utils/raceDataProcessing";
+import {useState, useEffect} from "react";
+import ConstructorStandingTable from "./ConstructorStandingTable";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import raceDataFormatter from "@/utils/raceDataFormatter";
 
 const DriverStandings = () => {
   const [firstRender, setFirstRender] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [driverStandings, setDriverStandings] = useState([]);
+  const [constructorsStanding, setConstructorsStanding] = useState([]);
   const [lastUpdated, setLastUpdated] = useState({});
 
   const fetchData = async () => {
     const res = await axios.get(
-      "http://ergast.com/api/f1/current/driverStandings"
+      "http://ergast.com/api/f1/current/constructorStandings"
     );
     var options = {compact: true, ignoreComment: true, spaces: 4};
     const json = convert.xml2js(res.data, options);
     const fetchedData = json.MRData.StandingsTable.StandingsList;
-    const formattedData = driverStandingsDataProcess(fetchedData);
-    setDriverStandings(formattedData.driverStandings);
-    // setSeasonInfo(formattedData.seasonInfo);
+    const formattedData = constructorStandingDataFormatter(fetchedData);
+    setConstructorsStanding(formattedData.constructorStanding);
 
     const lastUpdatedRes = await axios.get(
       "http://ergast.com/api/f1/current/last/results"
     );
     const lastUpdatedJson = convert.xml2js(lastUpdatedRes.data, options);
     const lastUpdatedFetchedData = lastUpdatedJson.MRData.RaceTable.Race;
-    const formattedLastUpdated = raceDataProcessing(lastUpdatedFetchedData);
+    const formattedLastUpdated = raceDataFormatter(lastUpdatedFetchedData);
     setLastUpdated(formattedLastUpdated.raceInfo);
   };
 
@@ -48,13 +47,13 @@ const DriverStandings = () => {
     return () => clearTimeout(timer);
   }, [firstRender]);
 
-  if (!driverStandings || !lastUpdated || loading) {
+  if (!constructorsStanding || !lastUpdated || loading) {
     return <LoadingSpinner />;
   }
 
   return (
-    <DriverStandingsTable
-      standings={driverStandings}
+    <ConstructorStandingTable
+      standings={constructorsStanding}
       lastUpdated={lastUpdated}
     />
   );

@@ -2,13 +2,13 @@ import axios from "axios";
 var convert = require("xml-js");
 
 import {useState, useEffect, Fragment} from "react";
-import RaceResultTable from "../components/RaceResultTable";
-import raceDataProcessing from "@/utils/raceDataProcessing";
-import Schedule from "../components/Schedule";
-import TabSelector from "../components/TabSelector";
-import useDisplayMode from "@/utils/useDisplayMode";
-import LoadingSpinner from "@/components/LoadingSpinner";
-import RaceInfo from "@/components/RaceInfo";
+import RaceResultTable from "@/components/RaceResult/RaceResultTable";
+import raceDataFormatter from "@/utils/raceDataFormatter";
+import Schedule from "@/components/Schedule/Schedule";
+import TabSelector from "@/components/ui/TabSelector";
+import useDisplayMode from "@/hooks/useDisplayMode";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import RaceInfo from "@/components/RaceInfo/RaceInfo";
 
 const index = () => {
   const [firstRender, setFirstRender] = useState(false);
@@ -26,7 +26,7 @@ const index = () => {
     var options = {compact: true, ignoreComment: true, spaces: 4};
     const json = convert.xml2js(res.data, options);
     const fetchedData = json.MRData.RaceTable.Race;
-    const formattedData = raceDataProcessing(fetchedData);
+    const formattedData = raceDataFormatter(fetchedData);
     setRaceInfo(formattedData.raceInfo);
     setRaceResult(formattedData.raceResult);
 

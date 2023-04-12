@@ -1,28 +1,14 @@
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import {Fragment, useMemo} from "react";
-import Table from "@/utils/Table";
+import Table from "@/components/ui/Table";
 
-const DriverStandingsTable = ({standings, lastUpdated}) => {
+const ConstructorStandingTable = ({standings, lastUpdated}) => {
   const columns = useMemo(
     () => [
       {
         Header: "Pos",
         accessor: "position",
-        Cell: ({row}) => (
-          <div className="race__result-position">{row.values.position}</div>
-        ),
-      },
-      {
-        Header: "Driver",
-        accessor: "driver",
-        Cell: ({row}) => (
-          <Fragment>
-            <span
-              className={`fi fi-${row.values.driver.nationality.toLowerCase()}`}
-            ></span>
-            <span>{`${row.values.driver.driver}`}</span>
-          </Fragment>
-        ),
+        Cell: ({row}) => row.values.position,
       },
       {
         Header: "Constructor",
@@ -51,4 +37,4 @@ const DriverStandingsTable = ({standings, lastUpdated}) => {
     </Fragment>
   );
 };
-export default DriverStandingsTable;
+export default ConstructorStandingTable;

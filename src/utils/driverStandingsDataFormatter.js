@@ -1,7 +1,7 @@
 var nationalities = require("i18n-nationality");
 nationalities.registerLocale(require("i18n-nationality/langs/en.json"));
 
-const driverStandingsDataProcess = (data) => {
+const driverStandingsDataFormatter = (data) => {
   let driverStandings = [];
   let seasonInfo = {};
   if (data) {
@@ -34,4 +34,4 @@ const driverStandingsDataProcess = (data) => {
   }
   return {driverStandings, seasonInfo};
 };
-export default driverStandingsDataProcess;
+export default driverStandingsDataFormatter;
