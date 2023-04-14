@@ -62,7 +62,7 @@ const index = () => {
               {displayCategory === "schedule" && (
                 <Fragment>
                   <Schedule
-                    raceInfo={data.raceInfo}
+                    raceInfo={lastestRaceData.raceInfo}
                     schedule={scheduleData.schedule}
                     parseRaceTime={scheduleData.parseRaceTime}
                     enableFetch={false}
