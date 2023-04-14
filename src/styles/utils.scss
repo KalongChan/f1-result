@@ -5,6 +5,7 @@ $highlight-text: #272727;
 $bg-color: #272727;
 $scroll-bar-width: 12px;
 $nav-height: 80px;
+$mobile-font-size: 13px;
 
 @mixin middle {
   @media (max-width: 1280px) {
@@ -25,7 +26,7 @@ $nav-height: 80px;
 }
 
 @mixin smallTable {
-  @media (max-width: 880px) {
+  @media (max-width: 900px) {
     @content;
   }
 }

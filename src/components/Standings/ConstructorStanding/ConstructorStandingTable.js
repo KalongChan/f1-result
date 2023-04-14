@@ -30,7 +30,12 @@ const ConstructorStandingTable = ({standings, lastUpdated}) => {
   );
   return (
     <Fragment>
-      <Table columns={columns} data={[...standings]} type={"standing__table"} />
+      <Table
+        columns={columns}
+        data={[...standings]}
+        type={"standing__table"}
+        isConstructorStanding={true}
+      />
       <div className="standing__lastupdated">
         Last updated: {lastUpdated.date}
       </div>

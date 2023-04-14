@@ -2,7 +2,6 @@
 
 .standing {
   display: flex;
-  // justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
@@ -31,13 +30,20 @@
   }
 
   &__table {
-    &-pos,
-    &-wins,
-    &-ponits {
+    @include utils.mobile {
+      font-size: utils.$mobile-font-size;
+      // font-size: utils.$mobile-font-size;
+    }
+
+    &-pos {
       width: 70px;
       @include utils.smallTable {
         width: 50px;
       }
+    }
+
+    &-wins {
+      width: 70px;
     }
 
     &-driver {
@@ -45,8 +51,8 @@
       & span {
         margin-right: 5px;
       }
-      @include utils.smallTable {
-        width: 190px;
+      @include utils.mobile {
+        width: 150px;
       }
     }
 
@@ -62,6 +68,16 @@
 
     & th {
       text-align: start;
+    }
+
+    & td {
+      height: 30px;
+    }
+
+    &-constructor {
+      @include utils.smallTable {
+        display: none;
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 import {useTable} from "react-table";
 
-function Table({columns, data, type}) {
+function Table({columns, data, type, isConstructorStanding}) {
   // Use the state and functions returned from useTable to build your UI
   const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} =
     useTable({
@@ -10,7 +10,10 @@ function Table({columns, data, type}) {
 
   // Render the UI for your table
   return (
-    <table {...getTableProps()}>
+    <table
+      style={{height: `${isConstructorStanding ? `auto` : ``}`}}
+      {...getTableProps()}
+    >
       <thead>
         {headerGroups.map((headerGroup, i) => (
           <tr {...headerGroup.getHeaderGroupProps()} key={i}>
@@ -18,6 +21,9 @@ function Table({columns, data, type}) {
               <th
                 {...column.getHeaderProps()}
                 key={j}
+                style={{
+                  display: `${isConstructorStanding ? `table-cell` : ``}`,
+                }}
                 className={`${type}-${
                   column.Header.toLowerCase().split("/")[0]
                 }`}
@@ -38,6 +44,9 @@ function Table({columns, data, type}) {
                   <td
                     {...cell.getCellProps()}
                     key={j}
+                    style={{
+                      display: `${isConstructorStanding ? `table-cell` : ``}`,
+                    }}
                     className={`${type}-${
                       cell.column.Header.toLowerCase().split("/")[0]
                     }`}
