@@ -6,55 +6,39 @@ import {useState, useEffect} from "react";
 import ConstructorStandingTable from "./ConstructorStandingTable";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import raceDataFormatter from "@/utils/raceDataFormatter";
+import useFetch from "@/hooks/useFetch";
 
 const DriverStandings = () => {
   const [firstRender, setFirstRender] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [constructorsStanding, setConstructorsStanding] = useState([]);
-  const [lastUpdated, setLastUpdated] = useState({});
 
-  const fetchData = async () => {
-    const res = await axios.get(
-      "http://ergast.com/api/f1/current/constructorStandings"
-    );
-    var options = {compact: true, ignoreComment: true, spaces: 4};
-    const json = convert.xml2js(res.data, options);
-    const fetchedData = json.MRData.StandingsTable.StandingsList;
-    const formattedData = constructorStandingDataFormatter(fetchedData);
-    setConstructorsStanding(formattedData.constructorStanding);
+  const {
+    data: constructorStandingData,
+    loading: constructorStandingLoading,
+    error: constructorStandingError,
+  } = useFetch(
+    "http://ergast.com/api/f1/current/constructorStandings",
+    "constructor"
+  );
 
-    const lastUpdatedRes = await axios.get(
-      "http://ergast.com/api/f1/current/last/results"
-    );
-    const lastUpdatedJson = convert.xml2js(lastUpdatedRes.data, options);
-    const lastUpdatedFetchedData = lastUpdatedJson.MRData.RaceTable.Race;
-    const formattedLastUpdated = raceDataFormatter(lastUpdatedFetchedData);
-    setLastUpdated(formattedLastUpdated.raceInfo);
-  };
+  const {
+    data: lastestRaceData,
+    loading: lastestRaceLoading,
+    error: lastestRaceError,
+  } = useFetch("http://ergast.com/api/f1/current/last/results", "raceData");
 
-  useEffect(() => {
-    if (!firstRender) {
-      setFirstRender(true);
-      return;
-    }
-
-    let timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
-
-    fetchData();
-
-    return () => clearTimeout(timer);
-  }, [firstRender]);
-
-  if (!constructorsStanding || !lastUpdated || loading) {
+  if (
+    !constructorStandingData ||
+    !lastestRaceData ||
+    constructorStandingLoading ||
+    lastestRaceLoading
+  ) {
     return <LoadingSpinner />;
   }
 
   return (
     <ConstructorStandingTable
-      standings={constructorsStanding}
-      lastUpdated={lastUpdated}
+      standings={constructorStandingData.constructorStanding}
+      lastUpdated={lastestRaceData.raceInfo}
     />
   );
 };

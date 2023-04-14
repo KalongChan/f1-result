@@ -4,6 +4,7 @@ nationalities.registerLocale(require("i18n-nationality/langs/en.json"));
 const raceDataFormatter = (data) => {
   let raceResult = [];
   let raceInfo = {};
+
   if (data) {
     data.ResultsList.Result.map((result) => {
       raceResult.push({

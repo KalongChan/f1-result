@@ -9,6 +9,7 @@ const Schedule = ({
   parseRaceTime,
   enableFetch,
   resetLoading,
+  resetDisplayCategory,
 }) => {
   const [firstRender, setFirstRender] = useState(false);
   const [selfFetchSchedule, setSelfFetchSchedule] = useState();
@@ -44,6 +45,9 @@ const Schedule = ({
     }
     if (resetLoading) {
       resetLoading();
+    }
+    if (resetDisplayCategory) {
+      resetDisplayCategory();
     }
     router.push(
       `/results?year=${race._attributes.season}&round=${race._attributes.round}`

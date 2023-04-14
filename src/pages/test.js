@@ -1,8 +1,9 @@
 import ConstructorsStanding from "@/components/Standings/ConstructorStanding/ConstructorStanding";
 import DriverStandings from "@/components/Standings/DriverStanding/DriverStanding";
-import LastestRace from "@/components/LastestRace";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import TabSelector from "@/components/ui/TabSelector";
-import {Fragment, useState} from "react";
+import useFetch from "@/hooks/useFetch";
+import {Fragment, useEffect, useState} from "react";
 
 const test = () => {
   const [displayCategory, setDisplayCategory] = useState("driver");
@@ -12,12 +13,12 @@ const test = () => {
 
   const selectorData = ["driver", "constructor"];
 
-  return (
-    <Fragment>
-      <TabSelector modeHandler={modeHandler} selectorData={selectorData} />
-      {displayCategory === "driver" && <DriverStandings />}
-      {displayCategory === "constructor" && <ConstructorsStanding />}
-    </Fragment>
+  const {data, loading, error} = useFetch(
+    "http://ergast.com/api/f1/current/last/results",
+    "raceData"
   );
+  console.log(data);
+
+  return <Fragment>{loading && <LoadingSpinner />}</Fragment>;
 };
 export default test;
