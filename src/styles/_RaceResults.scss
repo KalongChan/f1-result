@@ -20,17 +20,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1080px;
     @include utils.middle {
       flex-direction: column;
-      width: 800px;
-    }
-    @include utils.smallTable {
-      width: 450px;
-    }
-
-    @include utils.mobile {
-      width: 350px;
     }
 
     &-right {
@@ -47,16 +38,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1080px;
     @include utils.middle {
-      width: 800px;
-    }
-    @include utils.smallTable {
-      width: 450px;
-    }
-
-    @include utils.mobile {
-      width: 350px;
+      justify-content: center;
     }
   }
 

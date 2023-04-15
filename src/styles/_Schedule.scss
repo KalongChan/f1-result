@@ -16,9 +16,10 @@
 
   @include utils.middle {
     width: 100%;
-    height: calc(100vh); //100vh - header height
     display: flex;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    overflow-x: hidden;
   }
 
   @include utils.mobile {
@@ -35,6 +36,11 @@
     align-items: center;
     cursor: pointer;
 
+    & a {
+      width: 100%;
+      display: flex;
+    }
+
     &--actived {
       @extend .schedule__race;
       background-color: utils.$highlight-bg;
@@ -46,6 +52,7 @@
       @extend .schedule__race;
       opacity: 0.4;
       cursor: auto;
+      pointer-events: none;
     }
 
     &-flag {
@@ -65,6 +72,7 @@
 
     @include utils.middle {
       width: 33.3%;
+      max-height: 80px;
     }
 
     @include utils.mobile {

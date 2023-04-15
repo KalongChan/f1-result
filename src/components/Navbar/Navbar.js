@@ -1,6 +1,7 @@
 import useDisplayMode from "@/hooks/useDisplayMode";
+import Link from "next/link";
 import {useRouter} from "next/router";
-import {Fragment, useEffect, useState} from "react";
+import {Fragment, useState} from "react";
 
 const Navbar = () => {
   const router = useRouter();
@@ -8,15 +9,10 @@ const Navbar = () => {
   const mode = useDisplayMode();
 
   const [openMenu, setOpenMenu] = useState(false);
-  // const [isLoaded, setIsLoaded] = useState(false);
 
   const menuHandler = () => {
     setOpenMenu(!openMenu);
   };
-
-  // useEffect(() => {
-  //   setIsLoaded(true);
-  // }, []);
 
   //Disable scroll if menu is opened
   if (typeof window !== "undefined") {
@@ -30,8 +26,8 @@ const Navbar = () => {
       {/* Desktop Nav */}
       {mode === "desktop" && (
         <Fragment>
-          <div className="navbar__title" onClick={() => router.push("/")}>
-            F1 Result App
+          <div className="navbar__title">
+            <Link href={"/"}>F1 Result App</Link>
           </div>
           <div className="navbar__list">
             <ul>
@@ -41,17 +37,15 @@ const Navbar = () => {
                     ? "--active"
                     : ""
                 }`}
-                onClick={() => router.push("/")}
               >
-                Race Result
+                <Link href={"/"}>Race Result</Link>
               </li>
               <li
                 className={`navbar__list-item${
                   currentPath === "/standings" ? "--active" : ""
                 }`}
-                onClick={() => router.push("/standings")}
               >
-                Driver / Constructor Standing
+                <Link href={"/standings"}>Driver / Constructor Standing</Link>
               </li>
             </ul>
           </div>
@@ -61,8 +55,8 @@ const Navbar = () => {
       {/* Mobile Nav */}
       {mode === "mobile" && (
         <div className="navbar-mobile">
-          <div className="navbar__title" onClick={() => router.push("/")}>
-            F1 Result App
+          <div className="navbar__title">
+            <Link href={"/"}>F1 Result App</Link>
           </div>
           <div className={`hamburger-container`} onClick={menuHandler}>
             <div
@@ -87,22 +81,20 @@ const Navbar = () => {
                     : ""
                 }`}
                 onClick={() => {
-                  router.push("/");
                   menuHandler();
                 }}
               >
-                Race Result
+                <Link href={"/"}> Race Result</Link>
               </li>
               <li
                 className={`navbar-mobile__slide-menu-item${
                   currentPath === "/standings" ? "--active" : ""
                 }`}
                 onClick={() => {
-                  router.push("/standings");
                   menuHandler();
                 }}
               >
-                Driver / Constructor Standing
+                <Link href={"/standings"}>Driver / Constructor Standing</Link>
               </li>
             </ul>
           </div>

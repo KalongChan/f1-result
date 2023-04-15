@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 var convert = require("xml-js");
@@ -49,9 +50,6 @@ const Schedule = ({
     if (resetDisplayCategory) {
       resetDisplayCategory();
     }
-    router.push(
-      `/results?year=${race._attributes.season}&round=${race._attributes.round}`
-    );
   };
 
   const isActive = (index) => {
@@ -76,18 +74,22 @@ const Schedule = ({
               key={index}
               onClick={() => handleClick(selfFetchParaseRaceTime[index], race)}
             >
-              <div className="schedule__race-flag">
-                <img
-                  src={`countryflags/${race.Circuit.Location.Country._text}.svg`}
-                  alt=""
-                />
-              </div>
-              <div className="schedule__race-info">
-                <div className="schedule__race-title">
-                  {race.RaceName._text}
+              <Link
+                href={`/results?year=${race._attributes.season}&round=${race._attributes.round}`}
+              >
+                <div className="schedule__race-flag">
+                  <img
+                    src={`countryflags/${race.Circuit.Location.Country._text}.svg`}
+                    alt=""
+                  />
                 </div>
-                <div className="schedule__race-date">{race.Date._text}</div>
-              </div>
+                <div className="schedule__race-info">
+                  <div className="schedule__race-title">
+                    {race.RaceName._text}
+                  </div>
+                  <div className="schedule__race-date">{race.Date._text}</div>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
@@ -106,16 +108,22 @@ const Schedule = ({
             key={index}
             onClick={() => handleClick(parseRaceTime[index], race)}
           >
-            <div className="schedule__race-flag">
-              <img
-                src={`countryflags/${race.Circuit.Location.Country._text}.svg`}
-                alt=""
-              />
-            </div>
-            <div className="schedule__race-info">
-              <div className="schedule__race-title">{race.RaceName._text}</div>
-              <div className="schedule__race-date">{race.Date._text}</div>
-            </div>
+            <Link
+              href={`/results?year=${race._attributes.season}&round=${race._attributes.round}`}
+            >
+              <div className="schedule__race-flag">
+                <img
+                  src={`countryflags/${race.Circuit.Location.Country._text}.svg`}
+                  alt=""
+                />
+              </div>
+              <div className="schedule__race-info">
+                <div className="schedule__race-title">
+                  {race.RaceName._text}
+                </div>
+                <div className="schedule__race-date">{race.Date._text}</div>
+              </div>
+            </Link>
           </div>
         ))}
       </div>
