@@ -20,7 +20,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 1080px;
     @include utils.middle {
+      width: auto;
       flex-direction: column;
     }
 
@@ -38,8 +40,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 1080px;
     @include utils.middle {
       justify-content: center;
+      width: auto;
     }
   }
 
