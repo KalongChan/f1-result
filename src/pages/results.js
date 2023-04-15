@@ -22,8 +22,6 @@ const Race = () => {
     error: raceError,
   } = useFetch(`http://ergast.com/api/f1/${year}/${round}/results`, "raceData");
 
-  console.log(raceData);
-
   const resetLoading = () => {
     setReload(true);
     let timer = setTimeout(() => {

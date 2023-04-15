@@ -19,9 +19,14 @@ const useFetch = (url, args) => {
       return;
     }
 
+    if (url.includes("undefined")) {
+      return;
+    }
+
     let timer = setTimeout(() => {
       setLoading(false);
     }, 500);
+
     fetchData();
     return () => clearTimeout(timer);
   }, [url, isFirstRender]);
