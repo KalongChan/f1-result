@@ -8,7 +8,7 @@ import RaceInfo from "@/components/RaceInfo/RaceInfo";
 import useFetch from "@/hooks/useFetch";
 import Error from "@/components/Error/Error";
 
-const index = () => {
+const Index = () => {
   const mode = useDisplayMode();
 
   const {
@@ -115,4 +115,4 @@ const index = () => {
     );
   }
 };
-export default index;
+export default Index;
