@@ -28,7 +28,7 @@ const Schedule = ({
   }, [firstRender]);
 
   const fetchData = async () => {
-    const res = await axios.get("http://ergast.com/api/f1/current");
+    const res = await axios.get("https://ergast.com/api/f1/current");
     var options = {compact: true, ignoreComment: true, spaces: 4};
     const json = convert.xml2js(res.data, options);
     const data = json.MRData.RaceTable.Race;

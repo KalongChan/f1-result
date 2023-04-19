@@ -8,13 +8,13 @@ const DriverStandings = () => {
     data: driverStandingData,
     loading: driverStandingLoading,
     error: driverStandingError,
-  } = useFetch("http://ergast.com/api/f1/current/driverStandings", "driver");
+  } = useFetch("https://ergast.com/api/f1/current/driverStandings", "driver");
 
   const {
     data: lastestRaceData,
     loading: lastestRaceLoading,
     error: lastestRaceError,
-  } = useFetch("http://ergast.com/api/f1/current/last/results", "raceData");
+  } = useFetch("https://ergast.com/api/f1/current/last/results", "raceData");
 
   if (driverStandingError || lastestRaceError) {
     return <Error />;

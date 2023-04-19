@@ -13,7 +13,7 @@ const DriverStandings = () => {
     loading: constructorStandingLoading,
     error: constructorStandingError,
   } = useFetch(
-    "http://ergast.com/api/f1/current/constructorStandings",
+    "https://ergast.com/api/f1/current/constructorStandings",
     "constructor"
   );
 
@@ -21,7 +21,7 @@ const DriverStandings = () => {
     data: lastestRaceData,
     loading: lastestRaceLoading,
     error: lastestRaceError,
-  } = useFetch("http://ergast.com/api/f1/current/last/results", "raceData");
+  } = useFetch("https://ergast.com/api/f1/current/last/results", "raceData");
 
   if (constructorStandingError || lastestRaceError) {
     return <Error />;

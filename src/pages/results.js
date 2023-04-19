@@ -21,7 +21,10 @@ const Race = () => {
     data: raceData,
     loading: raceLoading,
     error: raceError,
-  } = useFetch(`http://ergast.com/api/f1/${year}/${round}/results`, "raceData");
+  } = useFetch(
+    `https://ergast.com/api/f1/${year}/${round}/results`,
+    "raceData"
+  );
 
   const resetLoading = () => {
     setReload(true);

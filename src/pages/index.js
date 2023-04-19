@@ -15,13 +15,13 @@ const Index = () => {
     data: lastestRaceData,
     loading: lastestRaceLoading,
     error: lastestRaceError,
-  } = useFetch("http://ergast.com/api/f1/current/last/results", "raceData");
+  } = useFetch("https://ergast.com/api/f1/current/last/results", "raceData");
 
   const {
     data: scheduleData,
     loading: scheduleLoading,
     error: scheduleError,
-  } = useFetch("http://ergast.com/api/f1/current", "schedule");
+  } = useFetch("https://ergast.com/api/f1/current", "schedule");
 
   //Render for <1280px width
   const [displayCategory, setDisplayCategory] = useState("result");
