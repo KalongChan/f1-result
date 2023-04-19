@@ -9,7 +9,7 @@ export default function App({Component, pageProps}) {
         <title>F1 Result App</title>
         <meta
           name="description"
-          content="A web application for checking F1 results and standing"
+          content="A web application for checking F1 results and standings"
         />
         <meta property="og:image" content="og.png" />
       </Head>
