@@ -1,0 +1,27 @@
+@use "./utils.scss";
+
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+
+  &-standing {
+    @extend .error;
+    height: calc(100vh - 80px - 80px);
+  }
+
+  &__text {
+    text-align: center;
+    margin: 10px 0px;
+  }
+
+  &__icon {
+    margin: 10px 0px;
+    text-align: center;
+    font-size: 36px;
+    color: utils.$highlight-bg;
+    cursor: pointer;
+  }
+}

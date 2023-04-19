@@ -5,6 +5,7 @@ import {useState} from "react";
 import Schedule from "@/components/Schedule/Schedule";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import NotUpdated from "@/components/NotUpdated/NotUpdated";
+import Error from "@/components/Error/Error";
 import TabSelector from "@/components/ui/TabSelector";
 import useDisplayMode from "@/hooks/useDisplayMode";
 import RaceInfo from "@/components/RaceInfo/RaceInfo";
@@ -39,6 +40,10 @@ const Race = () => {
   const modeHandler = (modeSelected) => {
     setDisplayCategory(modeSelected);
   };
+
+  if (raceError) {
+    return <Error />;
+  }
 
   if (!raceData || raceLoading || reload) {
     return <LoadingSpinner />;

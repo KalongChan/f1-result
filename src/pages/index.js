@@ -6,6 +6,7 @@ import useDisplayMode from "@/hooks/useDisplayMode";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import RaceInfo from "@/components/RaceInfo/RaceInfo";
 import useFetch from "@/hooks/useFetch";
+import Error from "@/components/Error/Error";
 
 const index = () => {
   const mode = useDisplayMode();
@@ -27,6 +28,10 @@ const index = () => {
   const modeHandler = (modeSelected) => {
     setDisplayCategory(modeSelected);
   };
+
+  if (lastestRaceError || scheduleError) {
+    return <Error />;
+  }
 
   if (
     !lastestRaceData ||

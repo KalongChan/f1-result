@@ -2,15 +2,12 @@ import constructorStandingDataFormatter from "@/utils/constructorStandingDataFor
 import axios from "axios";
 var convert = require("xml-js");
 
-import {useState, useEffect} from "react";
 import ConstructorStandingTable from "./ConstructorStandingTable";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
-import raceDataFormatter from "@/utils/raceDataFormatter";
 import useFetch from "@/hooks/useFetch";
+import Error from "@/components/Error/Error";
 
 const DriverStandings = () => {
-  const [firstRender, setFirstRender] = useState(false);
-
   const {
     data: constructorStandingData,
     loading: constructorStandingLoading,
@@ -25,6 +22,10 @@ const DriverStandings = () => {
     loading: lastestRaceLoading,
     error: lastestRaceError,
   } = useFetch("http://ergast.com/api/f1/current/last/results", "raceData");
+
+  if (constructorStandingError || lastestRaceError) {
+    return <Error />;
+  }
 
   if (
     !constructorStandingData ||

@@ -1,16 +1,8 @@
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import {Fragment, useMemo, useState} from "react";
+import {Fragment, useMemo} from "react";
 import Table from "@/components/ui/Table";
 
-const RaceResultTable = ({raceInfo, raceResult}) => {
-  // const [isMyTime, setIsMyTime] = useState(true);
-  // const setMyTime = () => {
-  //   setIsMyTime(true);
-  // };
-  // const setTrackTime = () => {
-  //   setIsMyTime(false);
-  // };
-
+const RaceResultTable = ({raceResult}) => {
   const columns = useMemo(
     () => [
       {
