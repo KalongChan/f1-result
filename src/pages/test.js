@@ -7,6 +7,6 @@ import useFetch from "@/hooks/useFetch";
 import {Fragment, useEffect, useState} from "react";
 
 const test = () => {
-  return <Error />;
+  return <LoadingSpinner />;
 };
 export default test;

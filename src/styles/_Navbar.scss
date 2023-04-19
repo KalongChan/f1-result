@@ -6,8 +6,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  //   position: sticky;
-  //   top: 0;
 
   &__title {
     font-size: 32px;
@@ -53,7 +51,6 @@
 
 //hamburger icon
 .hamburger-container {
-  // position: fixed;
   top: 0;
   right: 5%;
   width: 42px;
@@ -61,7 +58,6 @@
   cursor: pointer;
   z-index: 999;
   display: none;
-  //   @include utils.delayOpacity;
 
   @include utils.middle {
     display: block;

@@ -5,7 +5,7 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: calc(100vh - utils.$nav-height);
+  // height: calc(100vh - utils.$nav-height - utils.$tab-selector-height);
 
   &__mode {
     display: flex;
