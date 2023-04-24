@@ -42,7 +42,10 @@ const Navbar = () => {
               </li>
               <li
                 className={`navbar__list-item${
-                  currentPath === "/standings" ? "--active" : ""
+                  currentPath === "/standings" ||
+                  currentPath.includes("standings")
+                    ? "--active"
+                    : ""
                 }`}
               >
                 <Link href={"/standings"}>Driver / Constructor Standing</Link>
