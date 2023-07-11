@@ -56,6 +56,20 @@ const Schedule = ({
     return index === router.query.round - 1 || index === raceInfo?.round - 1;
   };
 
+  const convertLocalTime = (raceDate, raceTime) => {
+    const date = new Date(Date.parse(`${raceDate} ${raceTime}`));
+    const month = date.getMonth() + 1;
+    const localDate = `${date.getFullYear().toString().padStart(2, 0)}-${month
+      .toString()
+      .padStart(2, 0)}-${date.getDate().toString().padStart(2, 0)}`;
+    const localTime = `${date.getHours().toString().padStart(2, 0)}:${date
+      .getMinutes()
+      .toString()
+      .padStart(2, 0)}:${date.getSeconds().toString().padStart(2, 0)}`;
+
+    return {localDate, localTime};
+  };
+
   if (enableFetch) {
     return (
       <div className="schedule__container">
@@ -87,7 +101,18 @@ const Schedule = ({
                   <div className="schedule__race-title">
                     {race.RaceName._text}
                   </div>
-                  <div className="schedule__race-date">{race.Date._text}</div>
+                  <div className="schedule__race-date">
+                    {
+                      convertLocalTime(race?.Date._text, race?.Time._text)
+                        .localDate
+                    }
+                  </div>
+                  <div className="schedule__race-time">
+                    {
+                      convertLocalTime(race?.Date._text, race?.Time._text)
+                        .localTime
+                    }
+                  </div>
                 </div>
               </Link>
             </div>
@@ -121,7 +146,18 @@ const Schedule = ({
                 <div className="schedule__race-title">
                   {race.RaceName._text}
                 </div>
-                <div className="schedule__race-date">{race.Date._text}</div>
+                <div className="schedule__race-date">
+                  {
+                    convertLocalTime(race.Date?._text, race.Time?._text)
+                      .localDate
+                  }
+                </div>
+                <div className="schedule__race-time">
+                  {
+                    convertLocalTime(race.Date?._text, race.Time?._text)
+                      .localTime
+                  }
+                </div>
               </div>
             </Link>
           </div>

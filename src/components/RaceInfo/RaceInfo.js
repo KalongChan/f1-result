@@ -9,6 +9,20 @@ const RaceInfo = ({raceInfo}) => {
     setIsMyTime(false);
   };
 
+  const convertLocalTime = (raceDate, raceTime) => {
+    const date = new Date(Date.parse(`${raceDate} ${raceTime}`));
+    const month = date.getMonth() + 1;
+    const localDate = `${date.getFullYear().toString().padStart(2, 0)}-${month
+      .toString()
+      .padStart(2, 0)}-${date.getDate().toString().padStart(2, 0)}`;
+    const localTime = `${date.getHours().toString().padStart(2, 0)}:${date
+      .getMinutes()
+      .toString()
+      .padStart(2, 0)}:${date.getSeconds().toString().padStart(2, 0)}`;
+
+    return {localDate, localTime};
+  };
+
   const date = new Date(Date.parse(`${raceInfo.date} ${raceInfo.time}`));
   const month = date.getMonth() + 1;
   const localDate = `${date.getFullYear().toString().padStart(2, 0)}-${month
@@ -26,7 +40,9 @@ const RaceInfo = ({raceInfo}) => {
       <div className="race__info-racetime-wrapper">
         <div className="race__info-racetime">
           {isMyTime
-            ? `${localDate} ${localTime}`
+            ? `${convertLocalTime(raceInfo?.date, raceInfo?.time).localDate} ${
+                convertLocalTime(raceInfo?.date, raceInfo?.time).localTime
+              }`
             : `${raceInfo?.date} ${raceInfo?.time?.replace("Z", "")}`}
         </div>
         <div
